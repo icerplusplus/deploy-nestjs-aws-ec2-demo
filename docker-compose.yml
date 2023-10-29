@@ -28,7 +28,7 @@ services:
     volumes:
       - ./:/server
     ports:
-      - 8080:8080
+      - 8787:8787
     # depends_on:
     #   - maria_db
     networks:
@@ -36,7 +36,7 @@ services:
     environment:
       - NODE_ENV=development
       - SERVER_HOST=localhost
-      - SERVER_PORT=8080
+      - SERVER_PORT=8787
       - UPLOAD_LOCATION=uploads
       - PASSWORD_SALT=10
       - JWT_SECRET=JWT_SECRET_RAMDOM

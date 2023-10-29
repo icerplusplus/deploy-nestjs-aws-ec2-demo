@@ -25,7 +25,7 @@ RUN npm run build
 
 # RUN rm package*.json
 
-EXPOSE 8787
+EXPOSE 3000
 
 # CMD ["node", "dist/main.js"]
 CMD ["npm", "run", "start:dev"]

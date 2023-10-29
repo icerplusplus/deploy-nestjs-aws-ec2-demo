@@ -2,11 +2,9 @@ FROM node:18-alpine AS build
 
 WORKDIR /usr/src/app
 
-RUN npm install -g yarn
-
 RUN npm install -g @nestjs/cli
 
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
 
@@ -27,7 +25,7 @@ RUN npm run build
 
 # RUN rm package*.json
 
-# EXPOSE 8080
+EXPOSE 8787
 
 # CMD ["node", "dist/main.js"]
 CMD ["npm", "run", "start:dev"]

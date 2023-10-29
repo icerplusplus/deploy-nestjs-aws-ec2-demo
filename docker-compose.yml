@@ -1,0 +1,62 @@
+version: "3.8"
+services:
+  ## database
+  # maria_db:
+  #   container_name: maria_db_container
+  #   image: mysql:8.0.33
+  #   command: --default-authentication-plugin=mysql_native_password
+  #   restart: always
+  #   environment:
+  #     - MYSQL_DATABASE=motel_db
+  #     - MYSQL_ROOT_PASSWORD=Cuong123
+  #   volumes:
+  #     - motel_app_database:/var/lib/mysql
+  #     # - ./dev/mariadb:/docker-entrypoint-initdb.d
+  #   expose:
+  #     - "3306"
+  #   ports:
+  #     - "3306:3306"
+  #   networks:
+  #     - backend_network
+  ## server
+  server:
+    container_name: nestjs-server-container
+    build: ./
+      # context: ./server
+      # dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./:/server
+    ports:
+      - 8080:8080
+    # depends_on:
+    #   - maria_db
+    networks:
+      - backend_network
+    environment:
+      - NODE_ENV=development
+      - SERVER_HOST=localhost
+      - SERVER_PORT=8080
+      - UPLOAD_LOCATION=uploads
+      - PASSWORD_SALT=10
+      - JWT_SECRET=JWT_SECRET_RAMDOM
+      - ACCESS_TOKEN_EXPIRES_IN=30d
+      - REFRESH_TOKEN_EXPIRES_IN=30d
+      - JWT_SECRET=JWT_SECRETS
+      - TWILIO_ACCOUNT_SID=AC37795b071c745273a716d48e29e3ac6b
+      - TWILIO_AUTH_TOKEN=92d7500e49487197ec844e67dfc4198b
+      - TWILIO_MESSAGING_SERVICE_SID=MGdef7951732007ca6451176f4fdf12731
+      - DATABASE_HOST=mariadb.cknzmpy7dk0p.ap-southeast-2.rds.amazonaws.com
+      - DATABASE_NAME=motel_db
+      - DATABASE_PORT=3306
+      - DIALECT=mariadb
+      - DATABASE_USERNAME=admin
+      - DATABASE_PASSWORD=Cuong123
+    stdin_open: true
+    tty: true
+networks:
+  backend_network:
+    driver: bridge
+
+# volumes:
+#   motel_app_database:
